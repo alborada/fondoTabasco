@@ -1,0 +1,36 @@
+<?php
+
+$form = $this->form;
+$form->prepare();
+
+$form->setAttribute('action', $this->url('usuarios', array('controller' => 'login',
+        'action' => 'autenticar')));
+
+$form->setAttribute('method', 'post');
+//form label plugin
+$formLabel = $this->plugin('formLabel');
+
+echo $this->form()->openTag($form);
+?>
+
+<div class="form_element">
+    <?php
+    $email = $form->get('email');
+    echo $formLabel->openTag().$email->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($email);
+    echo $this->formElementErrors($email);
+    ?></div>
+
+
+<div class="form_element">
+    <?php
+    $password = $form->get('clave');
+    echo $formLabel->openTag().$password->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($password);
+    echo $this->formElementErrors($password);
+    ?></div>
+
+<?php echo $this->formElement($form->get('send')) ?>
+<?php echo $this->form()->closeTag() ?>

@@ -1,0 +1,22 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <?php echo $this->headMeta()->setCharset('UTF-8')?>
+        <?php echo $this->headTitle('') ?>
+        <?php echo $this->headLink()->prependStylesheet($this->basePath().'/css/style.css')?>
+        <?php echo $this->headStyle()?>
+        <?php echo $this->headScript()->prependFile($this->basePath().'/js/jquery.min.js')?>
+    </head>
+    <body>
+        <div class="header">
+            <h3>Menú y cabecera de página</h3>
+        </div>
+        <div class="content">
+            <?php echo $this->content; ?>
+        </div> <!-- /container -->
+        <div class="footer">
+            <h3>&copy; 2014 por AC - CF</h3>
+        </div>
+    </body>
+</html>
