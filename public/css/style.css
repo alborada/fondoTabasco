@@ -3,12 +3,21 @@ body {
     padding-bottom: 40px;
 }
 
-.zf-green {
-    color: #68b604;
-}
+
+
 .form_element{
     font-size: 20px;
     
+}
+.header{
+    background-color: #a94442;
+    font-size: 20px;
+    color: #FFFFFF
+}
+
+.footer{
+    background-color: #f0ad4e;
+    color: #FFFFFF;
 }
 
 .btn-success {
