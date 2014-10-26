@@ -41,8 +41,8 @@ class ArtistaDao implements IArtistaDao{
             'telefono' => $artista->getTelefono(),
             'semblanza' => $artista->getSemblanza(),
             'email' => $artista->getEmail(),
-            'fb' => $artista->getFacebook(),
-            'tw' => $artista->getTwitter(),
+            'facebook' => $artista->getFacebook(),
+            'twitter' => $artista->getTwitter(),
             'lugar' => $artista->getLugar(),
         );
         $id = (int) $artista->getIdArtista();

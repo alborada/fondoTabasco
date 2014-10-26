@@ -4,7 +4,7 @@ $this->headTitle($this->title);
 <h1> <?php echo $this->escapeHtml($this->title); ?></h1>
 <p>
     <a href="<?php echo $this->url('artistas', array('controller' => 'index',
-        'action' => 'index')); ?>">nuevo artista (+)</a>
+        'action' => 'crear')); ?>">nuevo artista (+)</a>
 </p>
 <table class="table">
     <tr>
@@ -19,6 +19,8 @@ $this->headTitle($this->title);
         <th>Facebook</th>
         <th>Twitter</th>
         <th>Semblanza</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
     </tr>
     <?php foreach ($this->artistas as $artista):?>
         <tr style="background-color:<?php echo $this->cycle(array("#C0F0F0",
@@ -36,9 +38,19 @@ $this->headTitle($this->title);
             <td><?php echo $this->escapeHtml($artista->getTwitter()) ?></td>
             <td><?php echo $this->escapeHtml($artista->getSemblanza()) ?></td>
             <td>
-
+                <a href="<?php echo $this->url('artistas',array('controller' => 'index',
+                    'action' => 'editar', 'id' => $artista->getIdArtista())) ?>">Editar</a>
                 
             </td>
+            <td>
+                <a onclick="return confirm('¿Está seguro que desea eliminar a <?php 
+                echo $artista->getNombre() ?>? ');"
+                        href="<?php echo $this->url('artistas', array('controller' => 
+                            'index','action' => 'eliminar','id' => $artista->getIdArtista())) ?> ">Eliminar</a>
+                
+                
+            </td>
+            
         </tr>
     <?php endforeach; ?>
 <?php 

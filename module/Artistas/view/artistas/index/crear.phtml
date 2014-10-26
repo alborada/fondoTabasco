@@ -1,0 +1,97 @@
+<h1><?php echo $this->escapeHtml($this->title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('action',$this->url('artistas',array('controller' => 'index', 'action'=>'guardar')));
+$form->setAttribute('method','post');
+
+$formLabel = $this->plugin('formLabel');
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('idArtista'));
+?>
+<div class="form_element">
+    <?php
+    $nombre = $form->get('nombre');
+    echo $formLabel->openTag() . $nombre->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($nombre);
+    echo $this->formElementErrors($nombre);
+?></div>
+<div class="form_element">
+    <?php
+    $fechaNacimiento = $form->get('fechaNacimiento');
+    echo $formLabel->openTag() . $fechaNacimiento->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($fechaNacimiento);
+    echo $this->formElementErrors($fechaNacimiento);
+?></div>
+<div class="form_element">
+    <?php
+    $fechaMuerte = $form->get('fechaMuerte');
+    echo $formLabel->openTag() . $fechaMuerte->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($fechaMuerte);
+    echo $this->formElementErrors($fechaMuerte);
+?></div>
+<div class="form_element">
+    <?php
+    $direccion = $form->get('direccion');
+    echo $formLabel->openTag() . $direccion->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($direccion);
+    echo $this->formElementErrors($direccion);
+?></div>
+<div class="form_element">
+    <?php
+    $telefono = $form->get('telefono');
+    echo $formLabel->openTag() . $telefono->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($telefono);
+    echo $this->formElementErrors($telefono);
+?></div>
+<div class="form_element">
+    <?php
+    $email = $form->get('email');
+    echo $formLabel->openTag() . $email->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($email);
+    echo $this->formElementErrors($email);
+?></div>
+<div class="form_element">
+    <?php
+    $facebook = $form->get('facebook');
+    echo $formLabel->openTag() . $facebook->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($facebook);
+    echo $this->formElementErrors($facebook);
+?></div>
+<div class="form_element">
+    <?php
+    $twitter = $form->get('twitter');
+    echo $formLabel->openTag() . $twitter->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($twitter);
+    echo $this->formElementErrors($twitter);
+?></div>
+<div class="form_element">
+    <?php
+    $lugar = $form->get('lugar');
+    echo $formLabel->openTag() . $lugar->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($lugar);
+    echo $this->formElementErrors($lugar);
+?></div>
+<div class="form_element">
+    <?php
+    $semblanza = $form->get('semblanza');
+    echo $formLabel->openTag() . $semblanza->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($semblanza);
+    echo $this->formElementErrors($semblanza);
+?></div>
+    
+<?php echo $this->formElement($form->get('send')) ?>
+<?php echo $this->form()->closeTag() ?>
+
