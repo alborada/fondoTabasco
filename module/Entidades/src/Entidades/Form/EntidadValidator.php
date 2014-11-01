@@ -1,14 +1,14 @@
 <?php
 
-namespace Artistas\Form;
+namespace Entidades\Form;
 use Zend\InputFilter\InputFilter;
 
-class ArtistaValidator extends InputFilter{
+class EntidadValidator extends InputFilter{
 
     public function __construct() {
         
         $this->add(array(
-            'name' => 'idArtista',
+            'name' => 'idEntidad',
             'required' => true,
             'filters' => array(
                 array('name' => 'Int'),
@@ -32,32 +32,6 @@ class ArtistaValidator extends InputFilter{
             ),
         ));
         
-        $this->add(array(
-            'name' => 'fechaNacimiento',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'Date',
-                    'options' => array(
-                        'format' => 'Y-m-d',
-                    )
-                ),
-            ),
-        ));
-        $this->add(array(
-            'name' => 'fechaMuerte',
-            'required' => false,
-            'validators' => array(
-                array(
-                    'name' => 'Date',
-                    'options' => array(
-                        'format' => 'Y-m-d',
-                    )
-                ),
-            ),
-        ));
-        
-
         $this->add(array(
             'name' => 'direccion',
             'required' => true,
@@ -150,22 +124,7 @@ class ArtistaValidator extends InputFilter{
                 ),
             ),
         ));
-        $this->add(array(
-            'name' => 'semblanza',
-            'required' => false,
-            'filters' => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                array(
-                    'name' => 'Alnum',
-                    'options' => array(
-                        'allowWhiteSpace' => true,
-                    )
-                ),
-            ),
-        ));
+
     }
     
 }

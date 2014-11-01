@@ -5,6 +5,8 @@ return array(
         'Application',
         'Usuarios',
         'Artistas',
+        'Obras',
+        'Entidades',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

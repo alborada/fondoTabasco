@@ -1,11 +1,11 @@
 <?php
 
-namespace Artistas\Form;
+namespace Entidades\Form;
 
 use Zend\Form\Form;
 use Zend\Form\Factory;
 
-class Artista extends Form{
+class Entidad extends Form{
     
     public function __construct($name = null) {
         parent::__construct($name);
@@ -13,7 +13,7 @@ class Artista extends Form{
         $this->setAttribute('method','post');
         
         $this->add(array (
-            'name' => 'idArtista',
+            'name' => 'idEntidad',
             'attributes' => array(
                 'type' => 'hidden',
             ),
@@ -26,30 +26,7 @@ class Artista extends Form{
                 'label' => 'Nombre',
             ),
         ));
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Date',
-            'name' => 'fechaNacimiento',
-            'options' => array (
-                'label' => 'Fecha de nacimiento aaaa-mm-dd'
-            ),
-            'attributes' => array(
-                'min' => '1900-01-01',
-                'max' => '2050-01-01',
-                'step' => '1',
-            ),
-        ));
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Date',
-            'name' => 'fechaMuerte',
-            'options' => array (
-                'label' => 'Fecha de fallecimiento aaaa-mm-dd',
-            ),
-            'attributes' => array(
-                'min' => '1900-01-01',
-                'max' => '2050-01-01',
-                'step' => '1',
-            ),
-        ));
+
         $this->add(array(
             'type' => 'Zend\Form\Element\Text',
             'name' => 'direccion',
@@ -98,13 +75,6 @@ class Artista extends Form{
             'name' => 'twitter',
             'options' => array (
                 'label' => 'Twitter',
-            ),
-        ));
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Textarea',
-            'name' => 'semblanza',
-            'options' => array (
-                'label' => 'Semblanza',
             ),
         ));
         $this->add(array (

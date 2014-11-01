@@ -1,0 +1,26 @@
+<h1><?php echo $this->escapeHtml($this->title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('action',$this->url('obras',array('controller' => 'index', 'action'=>'guardar')));
+$form->setAttribute('method','post');
+
+$formLabel = $this->plugin('formLabel');
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('idEstilo'));
+?>
+<div class="form_element">
+    <?php
+    $descripcion = $form->get('descripcion');
+    echo $formLabel->openTag() . $descripcion->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($descripcion);
+    echo $this->formElementErrors($descripcion);
+?></div>
+
+    
+<?php echo $this->formElement($form->get('send')) ?>
+<?php echo $this->form()->closeTag() ?>
+

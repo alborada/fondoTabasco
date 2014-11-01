@@ -3,13 +3,13 @@
 <?php
 $form = $this->form;
 $form->prepare();
-$form->setAttribute('action',$this->url('artistas',array('controller' => 'index', 'action'=>'guardar')));
+$form->setAttribute('action',$this->url('entidades',array('controller' => 'index', 'action'=>'guardar')));
 $form->setAttribute('method','post');
 
 $formLabel = $this->plugin('formLabel');
 
 echo $this->form()->openTag($form);
-echo $this->formHidden($form->get('idArtista'));
+echo $this->formHidden($form->get('idEntidad'));
 ?>
 <div class="form_element">
     <?php
@@ -21,27 +21,19 @@ echo $this->formHidden($form->get('idArtista'));
 ?></div>
 <div class="form_element">
     <?php
-    $fechaNacimiento = $form->get('fechaNacimiento');
-    echo $formLabel->openTag() . $fechaNacimiento->getOption('label');
-    echo $formLabel->closeTag();
-    echo $this->formInput($fechaNacimiento);
-    echo $this->formElementErrors($fechaNacimiento);
-?></div>
-<div class="form_element">
-    <?php
-    $fechaMuerte = $form->get('fechaMuerte');
-    echo $formLabel->openTag() . $fechaMuerte->getOption('label');
-    echo $formLabel->closeTag();
-    echo $this->formInput($fechaMuerte);
-    echo $this->formElementErrors($fechaMuerte);
-?></div>
-<div class="form_element">
-    <?php
     $direccion = $form->get('direccion');
     echo $formLabel->openTag() . $direccion->getOption('label');
     echo $formLabel->closeTag();
     echo $this->formInput($direccion);
     echo $this->formElementErrors($direccion);
+?></div>
+<div class="form_element">
+    <?php
+    $lugar = $form->get('lugar');
+    echo $formLabel->openTag() . $lugar->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($lugar);
+    echo $this->formElementErrors($lugar);
 ?></div>
 <div class="form_element">
     <?php
@@ -75,25 +67,6 @@ echo $this->formHidden($form->get('idArtista'));
     echo $this->formInput($twitter);
     echo $this->formElementErrors($twitter);
 ?></div>
-<div class="form_element">
-    <?php
-    $lugar = $form->get('lugar');
-    echo $formLabel->openTag() . $lugar->getOption('label');
-    echo $formLabel->closeTag();
-    echo $this->formInput($lugar);
-    echo $this->formElementErrors($lugar);
-?></div>
-<div class="form_element">
-    <?php
-    $semblanza = $form->get('semblanza');
-    echo $formLabel->openTag() . $semblanza->getOption('label');
-    echo $formLabel->closeTag();
-    echo $this->formTextarea($semblanza);
-    echo $this->formElementErrors($semblanza);
-?></div>
     
-<div class="form_element">
-    <?php echo $this->formElement($form->get('send')) ?>
-</div>
+<?php echo $this->formElement($form->get('send')) ?>
 <?php echo $this->form()->closeTag() ?>
-

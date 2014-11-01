@@ -1,0 +1,41 @@
+<?php
+$this->headTitle($this->title);
+?>
+<h1> <?php echo $this->escapeHtml($this->title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('obras', array('controller' => 'index',
+        'action' => 'crear')); ?>">nuevo estilo (+)</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Id estilo</th>
+        <th>Descripci&oacute;n</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+    </tr>
+    <?php foreach ($this->estilo as $estilo):?>
+        <tr style="background-color:<?php echo $this->cycle(array("#C0F0F0",
+                                                            "#FFFFFF"))
+                                              ->next()?>">
+            <td><?php echo $estilo->getIdEstilo() ?></td>
+            <td><?php echo $this->escapeHtml($estilo->getDescripcion()) ?></td>
+            <td>
+                <a href="<?php echo $this->url('obras',array('controller' => 'index',
+                    'action' => 'editar', 'id' => $estilo->getIdEstilo())) ?>">Editar</a>
+            </td>
+            <td>
+                <a onclick="return confirm('¿Está seguro que desea eliminar a <?php 
+                echo $estilo->getDescripcion() ?>? ');"
+                        href="<?php echo $this->url('obras', array('controller' => 
+                            'index','action' => 'eliminar','id' => $estilo->getIdEstilo())) ?> ">Eliminar</a>
+            </td>
+            
+        </tr>
+    <?php endforeach; ?>
+<?php 
+$this->cycle()->assign(array("#C0F0F0","#FFFFFF"));
+$this->cycle()->prev();
+?>
+        
+</table>
+

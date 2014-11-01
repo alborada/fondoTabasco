@@ -1,0 +1,55 @@
+<?php
+$this->headTitle($this->title);
+?>
+<h1> <?php echo $this->escapeHtml($this->title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('entidades', array('controller' => 'index',
+        'action' => 'crear')); ?>">nueva entidad (+)</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Id entidad</th>
+        <th>Nombre</th>
+        <th>Direcci&oacute;n</th>
+        <th>Lugar</th>
+        <th>Tel&eacute;fono</th>
+        <th>Email</th>
+        <th>Facebook</th>
+        <th>Twitter</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+    </tr>
+    <?php foreach ($this->entidad as $entidad):?>
+        <tr style="background-color:<?php echo $this->cycle(array("#C0F0F0",
+                                                            "#FFFFFF"))
+                                              ->next()?>">
+            <td><?php echo $entidad->getIdEntidad() ?></td>
+            <td><?php echo $this->escapeHtml($entidad->getNombre()) ?></td>
+            <td><?php echo $this->escapeHtml($entidad->getDireccion()) ?></td>
+            <td><?php echo $this->escapeHtml($entidad->getLugar()) ?></td>
+            <td><?php echo $this->escapeHtml($entidad->getTelefono()) ?></td>
+            <td><?php echo $this->escapeHtml($entidad->getEmail()) ?></td>
+            <td><?php echo $this->escapeHtml($entidad->getFacebook()) ?></td>
+            <td><?php echo $this->escapeHtml($entidad->getTwitter()) ?></td>
+            <td>
+                <a href="<?php echo $this->url('entidades',array('controller' => 'index',
+                    'action' => 'editar', 'id' => $entidad->getIdEntidad())) ?>">Editar</a>
+                
+            </td>
+            <td>
+                <a onclick="return confirm('¿Está seguro que desea eliminar a <?php 
+                echo $entidad->getNombre() ?>? ');"
+                        href="<?php echo $this->url('entidades', array('controller' => 
+                            'index','action' => 'eliminar','id' => $entidad->getIdEntidad())) ?> ">Eliminar</a>
+                
+                
+            </td>
+            
+        </tr>
+    <?php endforeach; ?>
+<?php 
+$this->cycle()->assign(array("#C0F0F0","#FFFFFF"));
+$this->cycle()->prev();
+?>
+        
+</table>
