@@ -10,7 +10,12 @@ use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Obras\Model\Entity\Estilo;
+use Obras\Model\Entity\Obra;
+use Obras\Model\Entity\TipoObra;
 use Obras\Model\Dao\EstiloDao;
+use Obras\Model\Dao\ObraDao;
+use Obras\Model\Dao\TipoObraDao;
+
 
 class Module implements AutoloaderProviderInterface
 {
@@ -28,6 +33,19 @@ class Module implements AutoloaderProviderInterface
         );
     }
 
+//    public function getControllerConfig(){
+//        return array(
+//            'factories' => array (
+//                'Obras\Controller\Obras' => function ($sm){
+//                    $controller = new \Obras\Controller\ObrasController();
+//                    $locator = $sm->getServiceLocator();
+//                    $controller->setObraDao($locator->get('Obras\Model\Dao\ObraDao'));
+//                    return $controller;
+//                }
+//            )
+//        );
+//    }
+    
     public function getConfig() {
         return include __DIR__ . '/config/module.config.php';
     }
@@ -54,6 +72,29 @@ class Module implements AutoloaderProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Estilo());
                     return new TableGateway('estilo',$dbAdapter,null,$resultSetPrototype);
                 },
+                'Obras\Model\Dao\ObraDao' => function($sm){
+                    $tableGateway = $sm->get('ObraTableGateway');
+                    $dao = new ObraDao($tableGateway);
+                    return $dao;
+                },
+                'ObraTableGateway' => function ($sm){
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Obra());
+                    return new TableGateway('obra',$dbAdapter,null,$resultSetPrototype);
+                },
+                'Obras\Model\Dao\TipoObraDao' => function($sm){
+                    $tableGateway = $sm->get('TipoObraTableGateway');
+                    $dao = new TipoObraDao($tableGateway);
+                    return $dao;
+                },
+                'TipoObraTableGateway' => function ($sm){
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new TipoObra());
+                    return new TableGateway('tipoobra',$dbAdapter,null,$resultSetPrototype);
+                },
+
             ),
             
         );

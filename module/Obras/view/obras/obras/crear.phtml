@@ -1,0 +1,81 @@
+<h1><?php echo $this->escapeHtml($this->title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('action',$this->url('obras',array('controller' => 'obras', 'action'=>'guardar')));
+$form->setAttribute('method','post');
+
+$formLabel = $this->plugin('formLabel');
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('idObra'));
+?>
+
+<div class="form_element">
+    <?php
+    $titulo = $form->get('titulo');
+    echo $formLabel->openTag() . $titulo->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($titulo);
+    echo $this->formElementErrors($titulo);
+?></div>
+
+<div class="form_element">
+    <?php
+    $descripcion = $form->get('descripcion');
+    echo $formLabel->openTag() . $descripcion->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($descripcion);
+    echo $this->formElementErrors($descripcion);
+?></div>
+
+
+<div class="form_element">
+    <?php
+    $anio = $form->get('anio');
+    echo $formLabel->openTag() . $anio->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($anio);
+    echo $this->formElementErrors($anio);
+?></div>
+
+<div class="form_element">
+    <?php
+    $tecnica = $form->get('tecnica');
+    echo $formLabel->openTag() . $tecnica->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($tecnica);
+    echo $this->formElementErrors($tecnica);
+?></div>
+
+<div class="form_element">
+    <?php
+    $medidas = $form->get('medidas');
+    echo $formLabel->openTag() . $medidas->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($medidas);
+    echo $this->formElementErrors($medidas);
+?></div>
+
+<div class="form_element">
+    <?php
+    $estilo = $form->get('estilo');
+    echo $formLabel->openTag() . $estilo->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formSelect($estilo);
+    echo $this->formElementErrors($estilo);
+?></div>
+
+<div class="form_element">
+    <?php
+    $tipoObra = $form->get('tipoObra');
+    echo $formLabel->openTag() . $tipoObra->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formSelect($tipoObra);
+    echo $this->formElementErrors($tipoObra);
+?></div>
+
+<?php echo $this->formElement($form->get('send')) ?>
+<?php echo $this->form()->closeTag() ?>
+

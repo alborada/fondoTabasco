@@ -3,6 +3,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Obras\Controller\Index' => 'Obras\Controller\IndexController',
+            'Obras\Controller\Obras' => 'Obras\Controller\ObrasController',
+            'Obras\Controller\TipoObra' => 'Obras\Controller\TipoObraController',
         ),
     ),
     'router' => array(

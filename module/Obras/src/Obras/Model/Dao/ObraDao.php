@@ -1,0 +1,80 @@
+<?php
+
+namespace Obras\Model\Dao;
+
+use Zend\Db\Sql\Sql;
+use Zend\Db\TableGateway\TableGateway;
+use Obras\Model\Entity\Obra;
+use Obras\Model\Entity\Estilo;
+
+class ObraDao implements IObraDao{
+    
+    protected $tableGateway;
+    
+    public function __construct(TableGateway $tableGateway) {
+        $this->tableGateway = $tableGateway;
+    }
+
+    public function obtenerPorId($id) {
+        $id=(int)$id;
+        $rowset = $this->tableGateway->select(array('idObra' => $id));
+        $row = $rowset->current();
+        if(!$row){
+            throw new \Exception("No se pudo encontrar la fila");
+        }
+        return $row;
+    }
+
+    public function obtenerTodos() {
+        //$resultSet = $this->tableGateway->select();
+        $select = $this->tableGateway->getSql()->select();
+        $select->join(array('est' => 'estilo'),'est.idEstilo = obra.idEstilo',array(
+            'idDeEstilo' => 'idEstilo','descripcionEstilo' => 'descripcion'));
+        
+        $select->join(array('tip' => 'tipoobra'),'tip.idtipoObra = obra.idTipoObra',array(
+            'idDeTipoObra' => 'idtipoObra','descripcionTipoObra' => 'descripcion'));        
+        //echo $select->getSqlString();
+        //die;
+        
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet;
+    }
+    
+    
+    public function eliminar(Obra $obra){
+        $this->tableGateway->delete(array('idObra' => $obra->getIdObra()));
+    }
+    
+    public function guardar(Obra $obra){
+        $data = array (
+            'titulo' => $obra->getTitulo(),
+            'anio' => $obra->getAnio(),
+            'tecnica' => $obra->getTecnica(),
+            'medidas' => $obra->getMedidas(),
+            'descripcion' => $obra->getDescripcion(),
+        );
+        
+        if($obra->getEstilo()!==null){
+            $data['idEstilo']=$obra->getEstilo()->getIdEstilo();
+        }
+        
+        if($obra->getTipoObra()!==null){
+            $data['idTipoObra']=$obra->getTipoObra()->getIdtipoObra();
+        }
+        
+        $id = (int) $obra->getIdObra();
+        if($id == 0){
+            $this->tableGateway->insert($data);
+        }else{
+            if($this->obtenerPorId($id)){
+                $this->tableGateway->update($data, array('idObra' => $id));
+            }else{
+                throw new \Exception("El id del formulario no existe");
+            }
+        }
+    }
+    
+    
+    
+    
+}

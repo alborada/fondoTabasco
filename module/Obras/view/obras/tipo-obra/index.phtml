@@ -3,31 +3,31 @@ $this->headTitle($this->title);
 ?>
 <h1> <?php echo $this->escapeHtml($this->title); ?></h1>
 <p>
-    <a href="<?php echo $this->url('obras', array('controller' => 'index',
-        'action' => 'crear')); ?>">nuevo estilo (+)</a>
+    <a href="<?php echo $this->url('obras', array('controller' => 'tipo-obra',
+        'action' => 'crear')); ?>">nuevo tipo de obra (+)</a>
 </p>
 <table class="table">
     <tr>
-        <th>Id estilo</th>
+        <th>Id tipo de obra</th>
         <th>Descripción</th>
         <th>Editar</th>
         <th>Eliminar</th>
     </tr>
-    <?php foreach ($this->estilo as $estilo):?>
+    <?php foreach ($this->tipoObra as $tipo):?>
         <tr style="background-color:<?php echo $this->cycle(array("#C0F0F0",
                                                             "#FFFFFF"))
                                               ->next()?>">
-            <td><?php echo $estilo->getIdEstilo() ?></td>
-            <td><?php echo $this->escapeHtml($estilo->getDescripcion()) ?></td>
+            <td><?php echo $tipo->getIdtipoObra() ?></td>
+            <td><?php echo $this->escapeHtml($tipo->getDescripcion()) ?></td>
             <td>
-                <a href="<?php echo $this->url('obras',array('controller' => 'index',
-                    'action' => 'editar', 'id' => $estilo->getIdEstilo())) ?>">Editar</a>
+                <a href="<?php echo $this->url('obras',array('controller' => 'tipo-obra',
+                    'action' => 'editar', 'id' => $tipo->getIdtipoObra())) ?>">Editar</a>
             </td>
             <td>
                 <a onclick="return confirm('¿Está seguro que desea eliminar a <?php 
-                echo $estilo->getDescripcion() ?>? ');"
+                echo $tipo->getDescripcion() ?>? ');"
                         href="<?php echo $this->url('obras', array('controller' => 
-                            'index','action' => 'eliminar','id' => $estilo->getIdEstilo())) ?> ">Eliminar</a>
+                            'tipo-obra','action' => 'eliminar','id' => $tipo->getIdtipoObra())) ?> ">Eliminar</a>
             </td>
             
         </tr>

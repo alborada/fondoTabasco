@@ -1,0 +1,54 @@
+<?php
+$this->headTitle($this->title);
+?>
+<h1> <?php echo $this->escapeHtml($this->title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('obras', array('controller' => 'obras',
+        'action' => 'crear')); ?>">nueva obra (+)</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Id obra</th>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Año</th>
+        <th>Técnica</th>
+        <th>Medidas</th>
+        <th>Estilo</th>
+        <th>Tipo de Obra</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+    </tr>
+    <?php foreach ($this->obras as $obra):?>
+        <tr style="background-color:<?php echo $this->cycle(array("#C0F0F0",
+                                                            "#FFFFFF"))
+                                              ->next()?>">
+            <td><?php echo $obra->getIdObra() ?></td>
+            <td><?php echo $this->escapeHtml($obra->getTitulo()) ?></td>
+            <td><?php echo $this->escapeHtml($obra->getDescripcion()) ?></td>
+            <td><?php echo $this->escapeHtml($obra->getAnio()) ?></td>
+            <td><?php echo $this->escapeHtml($obra->getTecnica()) ?></td>
+            <td><?php echo $this->escapeHtml($obra->getMedidas()) ?></td>
+
+            <td><?php echo $obra->getEstilo()->getDescripcion() ?></td>
+            <td><?php echo $obra->getTipoObra()->getDescripcion() ?></td>
+            <td>
+                <a href="<?php echo $this->url('obras',array('controller' => 'obras',
+                    'action' => 'editar', 'id' => $obra->getIdObra())) ?>">Editar</a>
+            </td>
+            <td>
+                <a onclick="return confirm('¿Está seguro que desea eliminar a <?php 
+                echo $obra->getDescripcion() ?>? ');"
+                        href="<?php echo $this->url('obras', array('controller' => 
+                            'obras','action' => 'eliminar','id' => $obra->getIdObra())) ?> ">Eliminar</a>
+            </td>
+            
+        </tr>
+    <?php endforeach; ?>
+<?php 
+$this->cycle()->assign(array("#C0F0F0","#FFFFFF"));
+$this->cycle()->prev();
+?>
+        
+</table>
+

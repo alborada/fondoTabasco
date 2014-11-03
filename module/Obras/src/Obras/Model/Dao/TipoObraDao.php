@@ -3,9 +3,9 @@
 namespace Obras\Model\Dao;
 
 use Zend\Db\TableGateway\TableGateway;
-use Obras\Model\Entity\Estilo;
+use Obras\Model\Entity\TipoObra;
 
-class EstiloDao implements IEstiloDao{
+class TipoObraDao implements ITipoObraDao{
 
     protected $tableGateway;
     
@@ -15,7 +15,7 @@ class EstiloDao implements IEstiloDao{
 
     public function obtenerPorId($id) {
         $id=(int)$id;
-        $rowset = $this->tableGateway->select(array('idEstilo' => $id));
+        $rowset = $this->tableGateway->select(array('idtipoObra' => $id));
         $row = $rowset->current();
         if(!$row){
             throw new \Exception("No se pudo encontrar la fila");
@@ -28,38 +28,35 @@ class EstiloDao implements IEstiloDao{
         return $resultSet;
     }
     
-    public function obtenerEstilosSelect(){
-        $estilos = $this->obtenerTodos();
+    public function obtenerTiposObraSelect(){
+        $tiposObras = $this->obtenerTodos();
         $result = array();
-        foreach($estilos as $est){
-            $result[$est->getIdEstilo()] = $est->getDescripcion();
+        foreach($tiposObras as $tip){
+            $result[$tip->getIdtipoObra()] = $tip->getDescripcion();
         }
         return $result;
     }
     
-    public function eliminar(Estilo $estilo){
-        $this->tableGateway->delete(array('idEstilo' => $estilo->getIdEstilo()));
+    public function eliminar(TipoObra $tipoObra){
+        $this->tableGateway->delete(array('idtipoObra' => $tipoObra->getIdtipoObra()));
     }
     
-    public function guardar(Estilo $estilo){
+    public function guardar(TipoObra $tipoObra){
         $data = array (
-            'descripcion' => $estilo->getDescripcion()
+            'descripcion' => $tipoObra->getDescripcion()
         );
-        $id = (int) $estilo->getIdEstilo();
+        $id = (int) $tipoObra->getIdtipoObra();
         if($id == 0){
             $this->tableGateway->insert($data);
         }else{
             if($this->obtenerPorId($id)){
-                $this->tableGateway->update($data, array('idEstilo' => $id));
+                $this->tableGateway->update($data, array('idtipoObra' => $id));
             }else{
                 throw new \Exception("El id del formulario no existe");
             }
         }
     }
     
+    
+    
 }
-
-
-
-
-

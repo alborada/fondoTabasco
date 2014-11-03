@@ -1,3 +1,22 @@
  
 <h3 class="panel-title"><?php echo $this->titulo ?></h3>
-<p>Hola mundo con Zend FrameWork 2</p>
+
+<div>
+    <div>
+    <p>Para ir al módulo de artistas:</p>
+    <p><a href="<?php echo $this->url('artistas', array('controller' => 'index',
+        'action' => 'index')); ?>">Listado de los artistas</a></p>
+    </div>
+    <div>
+    <p>Para ir al módulo de obras:</p>
+    <p><a href="<?php echo $this->url('obras', array('controller' => 'obras',
+        'action' => 'index')); ?>">Listado de las obras</a></p>
+    <p><a href="<?php echo $this->url('obras', array('controller' => 'index',
+        'action' => 'index')); ?>">Listado de los estilos de las obras</a></p>
+    
+    <p><a href="<?php echo $this->url('obras', array('controller' => 'tipo-obra',
+        'action' => 'index')); ?>">Listado de los tipos de obra</a></p>
+    </div>
+</div>
+
+<p>Sistema de registro de autores, obras y préstamos.</p>

@@ -11,6 +11,9 @@
     <body>
         <div class="header">
             <h3>Menú y cabecera de página</h3>
+            <a href="<?php echo $this->url('application',array('controller' => 'index',
+                'action' => 'index')) ?>">
+                <img src="<?php echo $this->basePath().'/img/home.png' ?>" border="0"></a>
         </div>
         <div class="content">
             <?php echo $this->content; ?>
