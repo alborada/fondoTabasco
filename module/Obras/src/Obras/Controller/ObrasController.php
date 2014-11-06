@@ -11,6 +11,7 @@ class ObrasController extends AbstractActionController{
     private $obraDao;
     private $estiloDao;
     private $tipoObraDao;
+    private $artistaDao;
     
     public function getObraDao(){
         if(!$this->obraDao){
@@ -32,6 +33,13 @@ class ObrasController extends AbstractActionController{
             $this->tipoObraDao = $sm->get('Obras\Model\Dao\TipoObraDao');
         }
         return $this->tipoObraDao;
+    }
+    public function getArtistaDao(){
+        if(!$this->artistaDao){
+            $sm = $this->getServiceLocator();
+            $this->artistaDao = $sm->get('Artistas\Model\Dao\ArtistaDao');
+        }
+        return $this->artistaDao;
     }
     
     public function indexAction() {
@@ -86,6 +94,7 @@ class ObrasController extends AbstractActionController{
         
         $dataForm['idEstilo'] = $dataForm['estilo'];
         $dataForm['idTipoObra'] = $dataForm['tipoObra'];
+        $dataForm['idArtista'] = $dataForm['artista'];
         
         $obra = new \Obras\Model\Entity\Obra();
         $obra->exchangeArray($dataForm);
@@ -102,6 +111,7 @@ class ObrasController extends AbstractActionController{
         
         $form->get('estilo')->setValueOptions($this->getEstiloDao()->obtenerEstilosSelect());
         $form->get('tipoObra')->setValueOptions($this->gettipoObraDao()->obtenerTiposObraSelect() );
+        $form->get('artista')->setValueOptions($this->getArtistaDao()->obtenerArtistasSelect() );
         
         return $form;
     }

@@ -27,6 +27,15 @@ class ArtistaDao implements IArtistaDao{
         $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
+
+    public function obtenerArtistasSelect(){
+        $artistas = $this->obtenerTodos();
+        $result = array();
+        foreach($artistas as $art){
+            $result[$art->getIdArtista()] = $art->getNombre();
+        }
+        return $result;
+    }
     
     public function eliminar(Artista $artista){
         $this->tableGateway->delete(array('idArtista' => $artista->getIdArtista()));

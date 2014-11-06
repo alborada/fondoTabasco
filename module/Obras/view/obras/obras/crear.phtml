@@ -60,6 +60,15 @@ echo $this->formHidden($form->get('idObra'));
 
 <div class="form_element">
     <?php
+    $artista = $form->get('artista');
+    echo $formLabel->openTag() . $artista->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formSelect($artista);
+    echo $this->formElementErrors($artista);
+?></div>
+
+<div class="form_element">
+    <?php
     $estilo = $form->get('estilo');
     echo $formLabel->openTag() . $estilo->getOption('label');
     echo $formLabel->closeTag();

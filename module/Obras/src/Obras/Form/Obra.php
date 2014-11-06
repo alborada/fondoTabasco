@@ -75,6 +75,15 @@ class Obra extends Form{
 
         $this->add(array(
             'type' => 'Zend\Form\Element\Select',
+            'name' => 'artista',
+            'options' => array(
+                'label' => 'Artista',
+                'empty_option' => 'Seleccione un artista =>',
+            ),
+        ));
+                
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
             'name' => 'tipoObra',
             'options' => array(
                 'label' => 'Tipo de Obra',

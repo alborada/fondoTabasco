@@ -6,6 +6,7 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\TableGateway\TableGateway;
 use Obras\Model\Entity\Obra;
 use Obras\Model\Entity\Estilo;
+use Artistas\Model\Entity\Artista;
 
 class ObraDao implements IObraDao{
     
@@ -32,7 +33,11 @@ class ObraDao implements IObraDao{
             'idDeEstilo' => 'idEstilo','descripcionEstilo' => 'descripcion'));
         
         $select->join(array('tip' => 'tipoobra'),'tip.idtipoObra = obra.idTipoObra',array(
-            'idDeTipoObra' => 'idtipoObra','descripcionTipoObra' => 'descripcion'));        
+            'idDeTipoObra' => 'idtipoObra','descripcionTipoObra' => 'descripcion'));
+
+        $select->join(array('art' => 'artista'),'art.idArtista = obra.idArtista',array(
+            'idDeArtista' => 'idArtista','nombreArtista' => 'nombre'));
+        
         //echo $select->getSqlString();
         //die;
         
@@ -60,6 +65,10 @@ class ObraDao implements IObraDao{
         
         if($obra->getTipoObra()!==null){
             $data['idTipoObra']=$obra->getTipoObra()->getIdtipoObra();
+        }
+        
+        if($obra->getArtista()!==null){
+            $data['idArtista']=$obra->getArtista()->getIdArtista();
         }
         
         $id = (int) $obra->getIdObra();

@@ -1,11 +1,16 @@
  
-<h3 class="panel-title"><?php echo $this->titulo ?></h3>
+<div class="menu">
+    <h2 class="panel-title"><?php echo $this->titulo ?></h2>
 
-<div>
     <div>
     <p>Para ir al módulo de artistas:</p>
     <p><a href="<?php echo $this->url('artistas', array('controller' => 'index',
         'action' => 'index')); ?>">Listado de los artistas</a></p>
+    </div>
+    <div>
+        <p>Para ir al módulo de entidades:</p>
+        <p><a href="<?php echo $this->url('entidades', array('controller' => 'index',
+            'action' => 'index')); ?>">Listado de las entidades que solicitan obras</a></p>
     </div>
     <div>
     <p>Para ir al módulo de obras:</p>

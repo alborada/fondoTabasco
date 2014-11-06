@@ -14,6 +14,7 @@ $this->headTitle($this->title);
         <th>Año</th>
         <th>Técnica</th>
         <th>Medidas</th>
+        <th>Artistas</th>
         <th>Estilo</th>
         <th>Tipo de Obra</th>
         <th>Editar</th>
@@ -30,6 +31,7 @@ $this->headTitle($this->title);
             <td><?php echo $this->escapeHtml($obra->getTecnica()) ?></td>
             <td><?php echo $this->escapeHtml($obra->getMedidas()) ?></td>
 
+            <td><?php echo $obra->getArtista()->getNombre() ?></td>
             <td><?php echo $obra->getEstilo()->getDescripcion() ?></td>
             <td><?php echo $obra->getTipoObra()->getDescripcion() ?></td>
             <td>

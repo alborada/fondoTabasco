@@ -108,7 +108,7 @@ class Obra {
             
             $this->artista=new Artista();
             $this->artista->setIdArtista((isset($data['idArtista']))? $data['idArtista']:null);
-            $this->artista->setNombre((isset($data['nombre']))? $data['nombre']:null);
+            $this->artista->setNombre((isset($data['nombreArtista']))? $data['nombreArtista']:null);
             $this->artista->setFechaNacimiento((isset($data['fechaNacimiento']))? $data['fechaNacimiento']:null);
             $this->artista->setFechaMuerte((isset($data['fechaMuerte']))? $data['fechaMuerte']:null);
             $this->artista->setDireccion((isset($data['direccion']))? $data['direccion']:null);
