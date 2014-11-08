@@ -112,11 +112,15 @@ class ObrasController extends AbstractActionController{
             } //set formElementErrors
             $form->setMessages(array('imagen'=>$error ));
         } else {
+                    
             $adapter->setDestination('./public/img');
-//            if ($adapter->receive($File['name'])) {
-//                $profile->exchangeArray($form->getData());
-//                echo 'Profile Name '.$profile->profilename.' upload '.$profile->fileupload;
-//            }
+            if ($adapter->receive($File['name'])) {
+                //$profile->exchangeArray($form->getData());
+                //echo 'Profile Name '.$profile->profilename.' upload '.$profile->fileupload;
+                
+                
+                
+            }
         }
                 
         
