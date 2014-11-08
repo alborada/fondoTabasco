@@ -9,5 +9,5 @@ interface ITipoObraDao {
     public function obtenerPorId($id);
     public function guardar(TipoObra $tipoObra);
     public function eliminar(TipoObra $tipoObra);
-    
+    public function obtenerTiposObraSelect();
 }

@@ -2,6 +2,7 @@
 
 namespace Obras\Controller;
 
+use Zend\Validator\File\Size;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Obras\Model\Entity\Obra;
@@ -81,7 +82,15 @@ class ObrasController extends AbstractActionController{
         $form = $this->getForm();
         //$form = new \Obras\Form\Obra("obra");
         $form->setInputFilter(new \Obras\Form\ObraValidator());
-        $data = $this->request->getPost();
+        //$data = $this->request->getPost();
+        $request = $this->getRequest();//->getPost();
+        $nonFile = $request->getPost()->toArray();
+        $File    = $this->params()->fromFiles('imagen');
+        $data = array_merge(
+                 $nonFile, //POST
+                 array('imagen'=> $File['name']) //FILE...
+             );
+        
         $form->setData($data);
         
         if(!$form->isValid()){
@@ -90,6 +99,27 @@ class ObrasController extends AbstractActionController{
             return $modelView;
         }
         
+        $size = new Size(array('min'=>30000)); //minimum bytes filesize
+        $adapter = new \Zend\File\Transfer\Adapter\Http();
+        //validator can be more than one...
+        $adapter->setValidators(array($size), $File['name']);
+     
+        if (!$adapter->isValid()){
+            $dataError = $adapter->getMessages();
+            $error = array();
+            foreach($dataError as $key=>$row) {
+                $error[] = $row;
+            } //set formElementErrors
+            $form->setMessages(array('imagen'=>$error ));
+        } else {
+            $adapter->setDestination('./public/img');
+//            if ($adapter->receive($File['name'])) {
+//                $profile->exchangeArray($form->getData());
+//                echo 'Profile Name '.$profile->profilename.' upload '.$profile->fileupload;
+//            }
+        }
+                
+        
         $dataForm = $form->getData();
         
         $dataForm['idEstilo'] = $dataForm['estilo'];
@@ -97,20 +127,25 @@ class ObrasController extends AbstractActionController{
         $dataForm['idArtista'] = $dataForm['artista'];
         
         $obra = new \Obras\Model\Entity\Obra();
-        $obra->exchangeArray($dataForm);
-        
-        $this->getObraDao()->guardar($obra);
-        return $this->redirect()->toRoute('obras',array(
-            'controller' => 'obras',
-            'action' => 'index',
+//        if ($adapter->receive($File['name'])) {
+            $obra->exchangeArray($dataForm);
+
+            $this->getObraDao()->guardar($obra);
+            return $this->redirect()->toRoute('obras',array(
+                'controller' => 'obras',
+                'action' => 'index',
         ));
+            
+//        }
+        //$obra->exchangeArray($dataForm);
+        
     }
     
     private function getForm(){
         $form = new \Obras\Form\Obra("obra");
         
         $form->get('estilo')->setValueOptions($this->getEstiloDao()->obtenerEstilosSelect());
-        $form->get('tipoObra')->setValueOptions($this->gettipoObraDao()->obtenerTiposObraSelect() );
+        $form->get('tipoObra')->setValueOptions($this->getTipoObraDao()->obtenerTiposObraSelect() );
         $form->get('artista')->setValueOptions($this->getArtistaDao()->obtenerArtistasSelect() );
         
         return $form;

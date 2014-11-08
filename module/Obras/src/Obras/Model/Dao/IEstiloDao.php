@@ -9,5 +9,5 @@ interface IEstiloDao {
     public function obtenerPorId($id);
     public function guardar(Estilo $estilo);
     public function eliminar(Estilo $estilo);
-    
+    public function obtenerEstilosSelect();
 }

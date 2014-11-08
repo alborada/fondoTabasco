@@ -28,6 +28,15 @@ class EntidadDao implements IEntidadDao{
         return $resultSet;
     }
     
+    public function obtenerEntidadesSelect(){
+        $entidades = $this->obtenerTodos();
+        $result = array();
+        foreach($entidades as $ent){
+            $result[$ent->getIdEntidad()] = $ent->getNombre();
+        }
+        return $result;
+    }
+    
     public function eliminar(Entidad $entidad){
         $this->tableGateway->delete(array('idEntidad' => $entidad->getIdEntidad()));
     }

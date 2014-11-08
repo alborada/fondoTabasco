@@ -85,6 +85,15 @@ echo $this->formHidden($form->get('idObra'));
     echo $this->formElementErrors($tipoObra);
 ?></div>
 
+<div class="form_element">
+    <?php
+    $imagen = $form->get('imagen');
+    echo $formLabel->openTag() . $imagen->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formFile($imagen);
+    echo $this->formElementErrors($imagen);
+?></div>
+
 <?php echo $this->formElement($form->get('send')) ?>
 <?php echo $this->form()->closeTag() ?>
 

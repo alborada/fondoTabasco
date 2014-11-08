@@ -38,6 +38,8 @@ class ObraDao implements IObraDao{
         $select->join(array('art' => 'artista'),'art.idArtista = obra.idArtista',array(
             'idDeArtista' => 'idArtista','nombreArtista' => 'nombre'));
         
+        $select->order(array('nombreArtista ASC', 'anio ASC'));
+        
         //echo $select->getSqlString();
         //die;
         
@@ -45,6 +47,14 @@ class ObraDao implements IObraDao{
         return $resultSet;
     }
     
+    public function obtenerObrasSelect(){
+        $obras = $this->obtenerTodos();
+        $result = array();
+        foreach($obras as $obr){
+            $result[$obr->getIdObra()] = $obr->getTitulo();
+        }
+        return $result;
+    }
     
     public function eliminar(Obra $obra){
         $this->tableGateway->delete(array('idObra' => $obra->getIdObra()));
@@ -57,6 +67,7 @@ class ObraDao implements IObraDao{
             'tecnica' => $obra->getTecnica(),
             'medidas' => $obra->getMedidas(),
             'descripcion' => $obra->getDescripcion(),
+            'imagen' => $obra->getImagen(),
         );
         
         if($obra->getEstilo()!==null){

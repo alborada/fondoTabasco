@@ -9,5 +9,5 @@ interface IObraDao {
     public function obtenerPorId($id);
     public function guardar(Obra $obra);
     public function eliminar(Obra $obra);    
-    
+    public function obtenerObrasSelect();
 }

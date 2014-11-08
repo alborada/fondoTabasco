@@ -9,5 +9,5 @@ interface IEntidadDao {
     public function obtenerPorId($id);
     public function guardar(Entidad $entidad);
     public function eliminar(Entidad $entidad);
-    
+    public function obtenerEntidadesSelect();
 }

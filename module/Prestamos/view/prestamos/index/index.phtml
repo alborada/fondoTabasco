@@ -1,0 +1,53 @@
+<?php
+$this->headTitle($this->title);
+?>
+<h1> <?php echo $this->escapeHtml($this->title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('prestamos', array('controller' => 'index',
+        'action' => 'crear')); ?>">nuevo préstamo (+)</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Id préstamo</th>
+        <th>Fecha préstamo</th>
+        <th>Ubicación</th>
+        <th>Fecha tentativa de regreso</th>
+        <th>Fecha de regreso</th>
+        <th>Entidad</th>
+        <th>Obra</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+    </tr>
+    <?php foreach ($this->prestamos as $prestamo):?>
+        <tr style="background-color:<?php echo $this->cycle(array("#C0F0F0",
+                                                            "#FFFFFF"))
+                                              ->next()?>">
+            <td><?php echo $prestamo->getIdPrestamo() ?></td>
+            <td><?php echo $this->escapeHtml($prestamo->getFechaPrestamo()) ?></td>
+            <td><?php echo $this->escapeHtml($prestamo->getUbicacion()) ?></td>
+            <td><?php echo $this->escapeHtml($prestamo->getFechaTentativaRegreso()) ?></td>
+            <td><?php echo $this->escapeHtml($prestamo->getFechaRegreso()) ?></td>
+            
+            <td><?php echo $prestamo->getEntidad()->getNombre() ?></td>
+            <td><?php echo $prestamo->getObra()->getTitulo() ?></td>
+            
+            <td>
+                <a href="<?php echo $this->url('prestamos',array('controller' => 'index',
+                    'action' => 'editar', 'id' => $prestamo->getIdPrestamo())) ?>">Editar</a>
+            </td>
+            <td>
+                <a onclick="return confirm('¿Está seguro que desea eliminar a <?php 
+                echo $prestamo->getIdPrestamo() ?>? ');"
+                        href="<?php echo $this->url('prestamos', array('controller' => 
+                            'index','action' => 'eliminar','id' => $prestamo->getIdPrestamo())) ?> ">Eliminar</a>
+            </td>
+            
+        </tr>
+    <?php endforeach; ?>
+<?php 
+$this->cycle()->assign(array("#C0F0F0","#FFFFFF"));
+$this->cycle()->prev();
+?>
+        
+</table>
+

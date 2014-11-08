@@ -9,5 +9,5 @@ interface IArtistaDao {
     public function obtenerPorId($id);
     public function guardar(Artista $artista);
     public function eliminar(Artista $artista);
-    
+    public function obtenerArtistasSelect();
 }

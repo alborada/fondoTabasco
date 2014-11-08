@@ -109,15 +109,15 @@ class Obra {
             $this->artista=new Artista();
             $this->artista->setIdArtista((isset($data['idArtista']))? $data['idArtista']:null);
             $this->artista->setNombre((isset($data['nombreArtista']))? $data['nombreArtista']:null);
-            $this->artista->setFechaNacimiento((isset($data['fechaNacimiento']))? $data['fechaNacimiento']:null);
-            $this->artista->setFechaMuerte((isset($data['fechaMuerte']))? $data['fechaMuerte']:null);
-            $this->artista->setDireccion((isset($data['direccion']))? $data['direccion']:null);
-            $this->artista->setTelefono((isset($data['telefono']))? $data['telefono']:null);
-            $this->artista->setSemblanza((isset($data['semblanza']))? $data['semblanza']:null);
-            $this->artista->setEmail((isset($data['email']))? $data['email']:null);
-            $this->artista->setFacebook((isset($data['facebook']))? $data['facebook']:null);
-            $this->artista->setTwitter((isset($data['twitter']))? $data['twitter']:null);
-            $this->artista->setLugar((isset($data['lugar']))? $data['lugar']:null);
+//            $this->artista->setFechaNacimiento((isset($data['fechaNacimiento']))? $data['fechaNacimiento']:null);
+//            $this->artista->setFechaMuerte((isset($data['fechaMuerte']))? $data['fechaMuerte']:null);
+//            $this->artista->setDireccion((isset($data['direccion']))? $data['direccion']:null);
+//            $this->artista->setTelefono((isset($data['telefono']))? $data['telefono']:null);
+//            $this->artista->setSemblanza((isset($data['semblanza']))? $data['semblanza']:null);
+//            $this->artista->setEmail((isset($data['email']))? $data['email']:null);
+//            $this->artista->setFacebook((isset($data['facebook']))? $data['facebook']:null);
+//            $this->artista->setTwitter((isset($data['twitter']))? $data['twitter']:null);
+//            $this->artista->setLugar((isset($data['lugar']))? $data['lugar']:null);
             
             $this->estilo =new Estilo();            
             $this->estilo->setIdEstilo((isset($data['idEstilo']))? $data['idEstilo']:null);

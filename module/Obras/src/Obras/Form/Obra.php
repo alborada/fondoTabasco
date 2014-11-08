@@ -11,6 +11,7 @@ class Obra extends Form{
         parent::__construct($name);
         
         $this->setAttribute('method','post');
+        $this->setAttribute('enctype','multipart/form-data');
         
         $this->add(array (
             'name' => 'idObra',
@@ -90,6 +91,16 @@ class Obra extends Form{
                 'empty_option' => 'Seleccione un tipo de obra =>',
             ),
         ));
+        
+         $this->add(array(
+            'name' => 'imagen',
+            'attributes' => array(
+                'type'  => 'file',
+            ),
+            'options' => array(
+                'label' => 'Cargar imagen',
+            ),
+        )); 
         
         $this->add(array (
             'name' => 'send',

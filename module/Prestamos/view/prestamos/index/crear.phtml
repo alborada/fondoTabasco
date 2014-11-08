@@ -1,0 +1,73 @@
+<h1><?php echo $this->escapeHtml($this->title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('action',$this->url('prestamos',array('controller' => 'index', 'action'=>'guardar')));
+$form->setAttribute('method','post');
+
+$formLabel = $this->plugin('formLabel');
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('idPrestamo'));
+?>
+
+<div class="form_element">
+
+<div class="form_element">
+    <?php
+    $fechaPrestamo = $form->get('fechaPrestamo');
+    echo $formLabel->openTag() . $fechaPrestamo->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($fechaPrestamo);
+    echo $this->formElementErrors($fechaPrestamo);
+?></div>
+
+<div class="form_element">
+    <?php
+    $ubicacion = $form->get('ubicacion');
+    echo $formLabel->openTag() . $ubicacion->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($ubicacion);
+    echo $this->formElementErrors($ubicacion);
+?></div>
+
+<div class="form_element">
+    <?php
+    $obra = $form->get('obra');
+    echo $formLabel->openTag() . $obra->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formSelect($obra);
+    echo $this->formElementErrors($obra);
+?></div>
+
+<div class="form_element">
+    <?php
+    $entidad = $form->get('entidad');
+    echo $formLabel->openTag() . $entidad->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formSelect($entidad);
+    echo $this->formElementErrors($entidad);
+?></div>
+    
+<div class="form_element">
+    <?php
+    $fechaTentativaRegreso = $form->get('fechaTentativaRegreso');
+    echo $formLabel->openTag() . $fechaTentativaRegreso->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($fechaTentativaRegreso);
+    echo $this->formElementErrors($fechaTentativaRegreso);
+?></div>
+    
+<div class="form_element">
+    <?php
+    $fechaRegreso = $form->get('fechaRegreso');
+    echo $formLabel->openTag() . $fechaRegreso->getOption('label');
+    echo $formLabel->closeTag();
+    echo $this->formInput($fechaRegreso);
+    echo $this->formElementErrors($fechaRegreso);
+?></div>    
+    
+<?php echo $this->formElement($form->get('send')) ?>
+<?php echo $this->form()->closeTag() ?>
+
