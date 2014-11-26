@@ -47,8 +47,41 @@ class ObraDao implements IObraDao{
         return $resultSet;
     }
     
+    public function obtenerTodosFiltrado() {
+        //$resultSet = $this->tableGateway->select();
+        $select = $this->tableGateway->getSql()->select();
+        $select->join(array('est' => 'estilo'),'est.idEstilo = obra.idEstilo',array(
+            'idDeEstilo' => 'idEstilo','descripcionEstilo' => 'descripcion'));
+        
+        $select->join(array('tip' => 'tipoobra'),'tip.idtipoObra = obra.idTipoObra',array(
+            'idDeTipoObra' => 'idtipoObra','descripcionTipoObra' => 'descripcion'));
+
+        $select->join(array('art' => 'artista'),'art.idArtista = obra.idArtista',array(
+            'idDeArtista' => 'idArtista','nombreArtista' => 'nombre'));
+        
+        $select->where(array('obra.prestada IS NULL'));
+        
+        $select->order(array('nombreArtista ASC', 'anio ASC'));
+        
+        //echo $select->getSqlString();
+        //die;
+        
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet;
+    }
+
+    //VER EN QUE METODO SE UTILIZA
+    public function obtenerObrasSelectFiltrado(){
+        $obras = $this->obtenerTodosFiltrado();
+        $result = array();
+        foreach($obras as $obr){
+            $result[$obr->getIdObra()] = $obr->getTitulo();
+        }
+        return $result;
+    }
+    
     public function obtenerObrasSelect(){
-        $obras = $this->obtenerTodos();
+        $obras = $this->obtenerTodosFiltrado();
         $result = array();
         foreach($obras as $obr){
             $result[$obr->getIdObra()] = $obr->getTitulo();
@@ -94,7 +127,37 @@ class ObraDao implements IObraDao{
         }
     }
     
-    
+    public function guardarPrestada(Obra $obra, $fecha){
+        
+        $data = array (
+            'titulo' => $obra->getTitulo(),
+            'anio' => $obra->getAnio(),
+            'tecnica' => $obra->getTecnica(),
+            'medidas' => $obra->getMedidas(),
+            'descripcion' => $obra->getDescripcion(),
+            'imagen' => $obra->getImagen(),
+            'prestada' => $fecha,
+        );
+        
+        if($obra->getEstilo()!==null){
+            $data['idEstilo']=$obra->getEstilo()->getIdEstilo();
+        }
+        
+        if($obra->getTipoObra()!==null){
+            $data['idTipoObra']=$obra->getTipoObra()->getIdtipoObra();
+        }
+        
+        if($obra->getArtista()!==null){
+            $data['idArtista']=$obra->getArtista()->getIdArtista();
+        }
+        
+        $id = (int) $obra->getIdObra();
+        if($this->obtenerPorId($id)){
+            $this->tableGateway->update($data, array('idObra' => $id));
+        }else{
+            throw new \Exception("El id del formulario no existe");
+        }
+    }    
     
     
 }

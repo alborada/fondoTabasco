@@ -46,11 +46,13 @@ class IndexController extends AbstractActionController {
 
     public function crearAction(){
         $form = $this->getForm();
+        $form->get('fechaRegreso')->setAttribute('disabled', 'disabled');
         //$form = new \Obras\Form\Obra("obra");
         return array('title' => 'Dar de alta un Préstamo','form' => $form);
         
     }
-//    
+//    aca hay que poner que no se pueda editar
+    //si ya se devolvio el prestamo 
     public function editarAction(){
         $id = (int) $this->params()->fromRoute('id', 0);
         if(!$id){
@@ -59,6 +61,7 @@ class IndexController extends AbstractActionController {
         
         //$form = new \Obras\Form\Obra("obra");
         $form = $this->getForm();
+        $form->get('fechaRegreso')->setAttribute('disabled','disabled');
         $prestamo = $this->getPrestamoDao()->obtenerPorId($id);
         $form->bind($prestamo);
         $form->get('send')->setAttribute('value', 'Editar');
@@ -93,6 +96,10 @@ class IndexController extends AbstractActionController {
         $prestamo->exchangeArray($dataForm);
         
         $this->getPrestamoDao()->guardar($prestamo);
+        
+        $obra = $this->getObraDao()->obtenerPorId($dataForm['idObra']);
+        $this->getObraDao()->guardarPrestada($obra,$prestamo->getFechaPrestamo());
+        
         return $this->redirect()->toRoute('prestamos',array(
             'controller' => 'index',
             'action' => 'index',
@@ -101,14 +108,14 @@ class IndexController extends AbstractActionController {
     
     private function getForm(){
         $form = new \Prestamos\Form\Prestamo("prestamo");
-        
-        $form->get('obra')->setValueOptions($this->getObraDao()->obtenerObrasSelect());
+        $form->get('obra')->setValueOptions($this->getObraDao()->obtenerObrasSelectFiltrado());
+//        $form->get('obra')->setValueOptions($this->getObraDao()->obtenerObrasSelect());
         $form->get('entidad')->setValueOptions($this->getEntidadDao()->obtenerEntidadesSelect() );
         
         return $form;
     }
 //
-    public function eliminarAction(){
+    public function regresarObraAction(){
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!id){
             return $this->redirect()->toRoute('prestamos');

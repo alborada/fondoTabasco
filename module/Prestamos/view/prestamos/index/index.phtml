@@ -16,7 +16,7 @@ $this->headTitle($this->title);
         <th>Entidad</th>
         <th>Obra</th>
         <th>Editar</th>
-        <th>Eliminar</th>
+        <th>Regresar obra</th>
     </tr>
     <?php foreach ($this->prestamos as $prestamo):?>
         <tr style="background-color:<?php echo $this->cycle(array("#C0F0F0",
@@ -32,14 +32,20 @@ $this->headTitle($this->title);
             <td><?php echo $prestamo->getObra()->getTitulo() ?></td>
             
             <td>
+            
+            <?php if( !$this->escapeHtml($prestamo->getFechaRegreso())): ?>
                 <a href="<?php echo $this->url('prestamos',array('controller' => 'index',
                     'action' => 'editar', 'id' => $prestamo->getIdPrestamo())) ?>">Editar</a>
+            <?php endif; ?>
+                
             </td>
             <td>
-                <a onclick="return confirm('¿Está seguro que desea eliminar a <?php 
-                echo $prestamo->getIdPrestamo() ?>? ');"
+            <?php if( !$this->escapeHtml($prestamo->getFechaRegreso())): ?>
+                <a onclick="return confirm('¿Está seguro que desea regresar la obra <?php 
+                echo $prestamo->getObra()->getTitulo() ?>? ');"
                         href="<?php echo $this->url('prestamos', array('controller' => 
-                            'index','action' => 'eliminar','id' => $prestamo->getIdPrestamo())) ?> ">Eliminar</a>
+                            'index','action' => 'regresarObra','id' => $prestamo->getIdPrestamo())) ?> ">Regresar obra</a>
+            <?php endif; ?>
             </td>
             
         </tr>

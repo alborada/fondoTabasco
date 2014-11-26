@@ -25,7 +25,7 @@ class Artista extends Form{
             'options' => array (
                 'label' => 'Nombre',
             ),
-        ));
+        ));     
         $this->add(array(
             'type' => 'Zend\Form\Element\Date',
             'name' => 'fechaNacimiento',

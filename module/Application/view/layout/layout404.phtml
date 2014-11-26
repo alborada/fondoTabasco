@@ -1,0 +1,26 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="es">
+    <head>
+        <?php echo $this->headMeta()->setCharset('UTF-8')?>
+        <?php echo $this->headTitle('') ?>
+        <?php echo $this->headLink()->prependStylesheet($this->basePath().'/css/style.css')?>
+        <?php echo $this->headStyle()?>
+        <?php echo $this->headScript()->prependFile($this->basePath().'/js/jquery.min.js')?>
+    </head>
+    <body style="background-image:url(<?php echo $this->basePath().'/img/404.jpg' ?>); 
+          background-size:1350px 620px" >
+        <div>
+            <h3></h3>
+            <a href="<?php echo $this->url('application',array('controller' => 'index',
+                'action' => 'index')) ?>">
+                <img src="<?php echo $this->basePath().'/img/home.png' ?>" border="0"></a>
+        </div>
+        <div class="content404">
+            <?php echo $this->content; ?>
+        </div> <!-- /container -->
+        <div class="footer">
+            <h3>&copy; 2014 por AC - CF</h3>
+        </div>
+    </body>
+</html>

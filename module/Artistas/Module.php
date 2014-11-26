@@ -1,11 +1,5 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonModule for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
+
 
 namespace Artistas;
 
@@ -18,6 +12,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\MvcEvent;
 use Artistas\Model\Entity\Artista;
 use Artistas\Model\Dao\ArtistaDao;
+
 
 class Module implements AutoloaderProviderInterface, ServiceProviderInterface {
     public function getAutoloaderConfig()
@@ -47,7 +42,9 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface {
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
     }
+    
     
     public function getServiceConfig() {
         return array(

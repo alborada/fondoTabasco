@@ -28,6 +28,9 @@ class IndexController extends AbstractActionController {
 
     public function crearAction(){
         $form = new \Artistas\Form\Artista("artista");
+        
+//        ZendX_JQuery::enableForm($form);
+        
         return array('title' => 'Dar de alta Artista','form' => $form);
         
     }

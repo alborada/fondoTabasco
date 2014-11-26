@@ -1,4 +1,4 @@
-<h1><?php echo $this->translate('A 404 error occurred') ?></h1>
+<h1><?php echo $this->translate('Ocurrió un error 404') ?></h1>
 <h2><?php echo $this->message ?></h2>
 
 <?php if (isset($this->reason) && $this->reason): ?>
@@ -16,7 +16,7 @@ switch ($this->reason) {
         $reasonMessage = $this->translate('The requested controller was not dispatchable.');
         break;
     case 'error-router-no-match':
-        $reasonMessage = $this->translate('The requested URL could not be matched by routing.');
+        $reasonMessage = $this->translate('La URL solicitada no pudo ser encontrada por el ruteador.');
         break;
     default:
         $reasonMessage = $this->translate('We cannot determine at this time why a 404 was generated.');

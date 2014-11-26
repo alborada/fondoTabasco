@@ -32,9 +32,7 @@ class PrestamoDao implements IPrestamoDao{
         $select->join(array('ent' => 'entidad'),'ent.idEntidad = prestamo.idEntidad',array(
             'idDeEntidad' => 'idEntidad','nombreEntidad' => 'nombre'));
 
-        
-        //echo $select->getSqlString();
-        //die;
+        $select->order(array('idPrestamo'));
         
         $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet;
@@ -50,8 +48,11 @@ class PrestamoDao implements IPrestamoDao{
             'fechaPrestamo' => $prestamo->getFechaPrestamo(),
             'ubicacion' => $prestamo->getUbicacion(),
             'fechaTentativaRegreso' => $prestamo->getFechaTentativaRegreso(),
-            'fechaRegreso' => $prestamo->getFechaRegreso(),
+            //'fechaRegreso' => $prestamo->getFechaRegreso(),
         );
+        if(!empty($prestamo->getFechaRegreso())){
+            $data['fechaRegreso']=$prestamo->getFechaRegreso();
+        }
         
         if($prestamo->getObra()!==null){
             $data['idObra']=$prestamo->getObra()->getIdObra();
