@@ -70,7 +70,15 @@ class ObrasController extends AbstractActionController{
         $form->bind($obra);
         $form->get('send')->setAttribute('value', 'Editar');
         
-        $modelView = new ViewModel(array('title' => 'Modificar datos de la obra', 'form' => $form));
+        if($obra->getImagen()){
+            //HAY QUE ARREGLAR LA CARGA DE LA IMAGEN AL EDITAR
+            $alguito = $form->get('imagen');
+            $form->get('imagen')->setOption('link', $alguito->getValue());
+            //echo '<br /><br /><h1> Hola '. $alguito->getValue() .' </h1>';
+            //$form->get('imagen')->setOption('label',$alguito->getValue());
+        }
+        
+        $modelView = new ViewModel(array('title' => 'Modificar datos de la obra ' .  $obra->getTitulo(), 'form' => $form));
         $modelView->setTemplate('obras/obras/crear');
         return $modelView;
     }
@@ -86,9 +94,11 @@ class ObrasController extends AbstractActionController{
         $request = $this->getRequest();//->getPost();
         $nonFile = $request->getPost()->toArray();
         $File    = $this->params()->fromFiles('imagen');
+                
         $data = array_merge(
                  $nonFile, //POST
                  array('imagen'=> $File['name']) //FILE...
+                 //array('imagen'=> $nonFile['idObra'] . $File['name']) //FILE...
              );
         
         $form->setData($data);
@@ -98,12 +108,19 @@ class ObrasController extends AbstractActionController{
             $modelView->setTemplate('obras/obras/crear');
             return $modelView;
         }
-        
-        $size = new Size(array('min'=>30000)); //minimum bytes filesize
-        $adapter = new \Zend\File\Transfer\Adapter\Http();
+        $adapter = new \Zend\File\Transfer\Adapter\Http();        
+        $size = new \Zend\Validator\File\Size(array('min'=>30000,'max'=>2000000)); //minimum bytes filesize
+        $extension = new \Zend\Validator\File\Extension(array('extension' => array('png','jpg','gif','raw','tiff')));
         //validator can be more than one...
-        $adapter->setValidators(array($size), $File['name']);
-     
+        $adapter->setValidators(array($size, $extension), $File['name']);
+        
+        $exten = substr($File['name'], strlen($File['name'])-3, 3);
+    
+        //$File['name']
+        $filename= $nonFile['idObra'] . '.' . $exten;
+        $adapter->addFilter('Rename', array('target' => $filename,
+            'overwrite' => true));
+        
         if (!$adapter->isValid()){
             $dataError = $adapter->getMessages();
             $error = array();
@@ -112,19 +129,21 @@ class ObrasController extends AbstractActionController{
             } //set formElementErrors
             $form->setMessages(array('imagen'=>$error ));
         } else {
-                    
+                   
+           
             $adapter->setDestination('./public/img');
             if ($adapter->receive($File['name'])) {
+                
+                //$filename = '22' . $adapter->getFileName();
+                //$adapter->addFilter('Rename', array('target' => $filename,'overwrite' => true));
                 //$profile->exchangeArray($form->getData());
                 //echo 'Profile Name '.$profile->profilename.' upload '.$profile->fileupload;
-                
-                
-                
+ 
             }
         }
-                
-        
         $dataForm = $form->getData();
+        
+        $dataForm['imagen'] = $filename;
         
         $dataForm['idEstilo'] = $dataForm['estilo'];
         $dataForm['idTipoObra'] = $dataForm['tipoObra'];

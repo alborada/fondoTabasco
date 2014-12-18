@@ -1,0 +1,24 @@
+<div id="modelo_header_wrapper">
+
+  <div id="modelo_header">
+    
+   	<div id="site_logo"></div>
+        
+		<div id="modelo_menu">
+      		<div id="modelo_menu_left"></div>
+            <ul>
+                  <li><a href="<?php echo $this->url('application',array('controller' => 'index',
+                'action' => 'index')) ?>" class="current">Inicio</a></li>
+                  <li><a href="<?php echo $this->url('obras', array('controller' => 'obras',
+        'action' => 'index')); ?>">Obras</a></li>
+                  <li><a href="<?php echo $this->url('artistas', array('controller' => 'index',
+        'action' => 'index')); ?>">Artistas</a></li>
+                  <li><a href="<?php echo $this->url('prestamos', array('controller' => 'index',
+        'action' => 'index')); ?>">Préstamos</a></li>
+                  <li><a href="<?php echo $this->url('entidades', array('controller' => 'index',
+            'action' => 'index')); ?>" class="last">Entidades</a></li>
+            </ul>    	
+		</div> <!-- fin de menu -->
+    
+    </div>  <!-- fin de header -->
+</div> <!-- fin de header wrapper -->

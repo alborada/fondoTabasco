@@ -1,6 +1,11 @@
 <?php
 $this->headTitle($this->title);
 ?>
+<p>Para administrar los estilos o tipos de las obras:</p>
+<div class="button_01"><a href="<?php echo $this->url('obras', array('controller' => 'index',
+        'action' => 'index')); ?>">Estilos</a><br /><a href="<?php echo $this->url('obras', array('controller' => 'tipo-obra',
+        'action' => 'index')); ?>">Tipos</a></div>
+
 <h1> <?php echo $this->escapeHtml($this->title); ?></h1>
 <p>
     <a href="<?php echo $this->url('obras', array('controller' => 'obras',
