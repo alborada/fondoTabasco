@@ -8,16 +8,24 @@ class Login extends Form{
     public function __construct($name = null) {
         parent::__construct($name);
         
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Email',
-            'name' => 'email',
-            'options' => array(
-                'label' => 'Correo',
+//        $this->add(array(
+//            'type' => 'Zend\Form\Element\Email',
+//            'name' => 'email',
+//            'options' => array(
+//                'label' => 'Correo',
+//            ),
+//        ));
+        $this->add(array (
+            'type' => 'Zend\Form\Element\Text',
+            'name' => 'nombre',
+            'options' => array (
+                'label' => 'Nombre de usuario',
             ),
         ));
+        
         $this->add(array (
             'type' => 'Zend\Form\Element\Password',
-            'name' => 'clave',
+            'name' => 'password',
             'options' => array(
                 'label' => 'Clave',
             ),

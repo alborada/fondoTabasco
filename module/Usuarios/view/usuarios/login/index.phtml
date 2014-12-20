@@ -1,36 +1,53 @@
-<?php
-
-$form = $this->form;
-$form->prepare();
-
-$form->setAttribute('action', $this->url('usuarios', array('controller' => 'login',
-        'action' => 'autenticar')));
-
-$form->setAttribute('method', 'post');
-//form label plugin
-$formLabel = $this->plugin('formLabel');
-
-echo $this->form()->openTag($form);
-?>
-
-<div class="form_element">
+<?php if (!$this->loggedIn): ?>
+    <?php if (isset($this->responseLogin)): ?>
+        <p><?php echo $this->responseLogin; ?></p>
+    <?php endif; ?>
     <?php
-    $email = $form->get('email');
-    echo $formLabel->openTag().$email->getOption('label');
-    echo $formLabel->closeTag();
-    echo $this->formInput($email);
-    echo $this->formElementErrors($email);
-    ?></div>
+// within a view script
+    $form = $this->form;
+    $form->prepare();
+
+    $form->setAttribute('action', $this->url('usuarios', array('controller' => 'login', 'action' => 'autenticar')));
+
+    $form->setAttribute('method', 'post');
+
+// Get the form label plugin
+    $formLabel = $this->plugin('formLabel');
+
+// Render the opening tag
+    echo $this->form()->openTag($form);
+    ?>
+    <div class="form_element">
+        <?php
+        $nombre = $form->get('nombre');
+        echo $formLabel->openTag() . $nombre->getOption('label');
+        echo $formLabel->closeTag();
+        echo $this->formInput($nombre);
+        echo $this->formElementErrors($nombre);
+        ?></div>
+
+    <div class="form_element">
+        <?php
+        $clave = $form->get('password');
+        echo $formLabel->openTag() . $clave->getOption('label');
+        echo $formLabel->closeTag();
+        echo $this->formInput($clave);
+        echo $this->formElementErrors($clave);
+        ?></div>
 
 
-<div class="form_element">
-    <?php
-    $password = $form->get('clave');
-    echo $formLabel->openTag().$password->getOption('label');
-    echo $formLabel->closeTag();
-    echo $this->formInput($password);
-    echo $this->formElementErrors($password);
-    ?></div>
+    <?php echo $this->formElement($form->get('send')) ?>
 
-<?php echo $this->formElement($form->get('send')) ?>
-<?php echo $this->form()->closeTag() ?>
+    <?php echo $this->form()->closeTag() ?>
+
+<?php else: ?>
+    <h3>Perfil</h3>
+    <p>Bienvenido <strong><?php echo $this->usuario->nombre; ?> </strong></p>
+
+    <ul>
+        <li><a href="<?php echo $this->url('usuarios', array('controller' => 'index', 'action' => 'index')) ?>">Administrar Usuarios</a></li>
+        <li><a href="<?php echo $this->url('usuarios', array('controller' => 'login', 'action' => 'logout')) ?>">cerrar sesi&oacute;n</a></li>
+    </ul>
+
+    <br />
+<?php endif; ?>

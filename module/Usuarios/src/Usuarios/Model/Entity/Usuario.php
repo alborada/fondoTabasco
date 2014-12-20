@@ -4,38 +4,34 @@ namespace Usuarios\Model\Entity;
 
 class Usuario {
 
-    private $id;
+    private $idUsuario;
     private $nombre;
-    private $apellido;
-    private $email;
-    private $clave;
+    //private $apellido;
+    //private $email;
+    private $password;
+    private $tipo;
 
-    public function __construct($id = null, $nombre = null, $apellido = null, $email = null, $clave = null) {
-        $this->id = $id;
+    public function __construct($idUsuario = null, $nombre = null, $password = null, $tipo = null) {
+        $this->idUsuario = $idUsuario;
         $this->nombre = $nombre;
-        $this->apellido = $apellido;
-        $this->email = $email;
-        $this->clave = $clave;
+        $this->password = $password;
+        $this->tipo = $tipo;
     }
 
-    public function getId() {
-        return $this->id;
+    public function getIdUsuario() {
+        return $this->idUsuario;
     }
 
     public function getNombre() {
         return $this->nombre;
     }
 
-    public function getApellido() {
-        return $this->apellido;
+    public function getPassword() {
+        return $this->password;
     }
 
-    public function getEmail() {
-        return $this->email;
-    }
-
-    public function getClave() {
-        return $this->clave;
+    public function getTipo() {
+        return $this->tipo;
     }
 
 }

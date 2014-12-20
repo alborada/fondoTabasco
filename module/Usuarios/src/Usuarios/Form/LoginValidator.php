@@ -7,20 +7,37 @@ use Zend\InputFilter\InputFilter;
 class LoginValidator extends InputFilter{
     
     public function __construct() {
-        $this->add(
+//        $this->add(
+//                array(
+//                    'name' => 'email',
+//                    'required' => 'true',
+//                    'validators' => array(
+//                        array(
+//                            'name' => 'EmailAddress',
+//                        ),
+//                    ),
+//                )
+//            );
+        $this->add(array(
+            'name' => 'nombre',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
                 array(
-                    'name' => 'email',
-                    'required' => 'true',
-                    'validators' => array(
-                        array(
-                            'name' => 'EmailAddress',
-                        ),
-                    ),
-                )
-            );
-            $this->add(
+                    'name' => 'Alnum',
+                    'options' => array(
+                        'allowWhiteSpace' => true,
+                    )
+                ),
+            ),
+        ));
+        
+        $this->add(
                     array(
-                        'name' => 'clave',
+                        'name' => 'password',
                         'required' => 'true',
                         'filters' => array(
                             array('name' => 'StripTags'),
