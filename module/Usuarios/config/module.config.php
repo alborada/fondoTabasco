@@ -3,6 +3,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Usuarios\Controller\Index' => 'Usuarios\Controller\IndexController',
+            'Usuarios\Controller\Error' => 'Usuarios\Controller\ErrorController',
         ),
     ),
     'router' => array(
