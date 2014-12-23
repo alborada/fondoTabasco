@@ -16,10 +16,15 @@
 }
 
 .content404 {
-    height: 600px;
+    height: auto;
+    width: 50%;
+    color: #000000;
+    background-color: #a6e1ec;
+}
+.content404_2 {
+    min-height: 400px;
     color: #000000;
 }
-
 .content h1{
     color: #843534;
 }

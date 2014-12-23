@@ -1,11 +1,30 @@
 <?php
 
 namespace Artistas\Form;
+use Zend\Validator\StringLength;
+use Zend\Validator\Identical;
+use Zend\Validator\NotEmpty;
 use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Input;
+use Zend\I18n\Validator\Alnum;
+use Zend\Validator\AbstractValidator;
 
 class ArtistaValidator extends InputFilter{
 
+    protected $opcionesAlnum = array(
+        'allowWhiteSpace' => true,
+        'messages' => array(
+            'notAlnum' => "El valor no es alfanumérico !!!"
+        )
+    );
+    
     public function __construct() {
+        
+        $translator = new \Zend\I18n\Translator\Translator();
+        $translator->addTranslationFile('phparray', './module/Artistas/language/es.php');
+        $translatorMvc = new \Zend\Mvc\I18n\Translator($translator);
+        \Zend\Validator\AbstractValidator::setDefaultTranslator($translatorMvc);
+
         
         $this->add(array(
             'name' => 'idArtista',
@@ -15,22 +34,31 @@ class ArtistaValidator extends InputFilter{
             ),
         ));
 
-        $this->add(array(
-            'name' => 'nombre',
-            'required' => true,
-            'filters' => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                array(
-                    'name' => 'Alnum',
-                    'options' => array(
-                        'allowWhiteSpace' => true,
-                    )
-                ),
-            ),
-        ));
+        $nombre = new Input('nombre');
+        $nombre->setRequired(true);
+        $nombre->getFilterChain()
+                ->attachByName('StripTags')
+                ->attachByName('StringTrim');
+        $nombre->getValidatorChain()
+                ->addValidator(new Alnum($this->opcionesAlnum));
+        
+        $this->add($nombre);
+//        $this->add(array(
+//            'name' => 'nombre',
+//            'required' => true,
+//            'filters' => array(
+//                array('name' => 'StripTags'),
+//                array('name' => 'StringTrim'),
+//            ),
+//            'validators' => array(
+//                array(
+//                    'name' => 'Alnum',
+//                    'options' => array(
+//                        'allowWhiteSpace' => true,
+//                    )
+//                ),
+//            ),
+//        ));
         
         $this->add(array(
             'name' => 'fechaNacimiento',

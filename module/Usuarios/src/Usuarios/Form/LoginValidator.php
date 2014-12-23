@@ -48,10 +48,10 @@ class LoginValidator extends InputFilter{
                                 'name' => 'StringLength',
                                 'options' => array(
                                     'min' => 4,
-                                    'max' => 8,
+                                    'max' => 20,
                                     'messages' => array(
                                     StringLength::TOO_SHORT => 'La passw debe tener min 4 caracteres',
-                                    StringLength::TOO_LONG => 'La passw debe tener max 8 caracteres',
+                                    StringLength::TOO_LONG => 'La passw debe tener max 20 caracteres',
                                     )
                                 ),
                             ),

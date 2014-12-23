@@ -10,17 +10,16 @@
     </head>
     <body style="background-image:url(<?php echo $this->basePath().'/img/pages/404.jpg' ?>); 
           background-size:1350px 620px" >
-        <div>
-            <h3></h3>
-            <a href="<?php echo $this->url('application',array('controller' => 'index',
-                'action' => 'index')) ?>">
-                <img src="<?php echo $this->basePath().'/img/pages/home.png' ?>" border="0"></a>
-        </div>
+            
+            <?php echo $this->partial('layout/header'); ?>
+        
         <div class="content404">
             <?php echo $this->content; ?>
         </div> <!-- /container -->
-        <div class="footer">
-            <h3>&copy; 2014 por AC - CF</h3>
-        </div>
+        <div class="content404_2">
+            <p></p>
+        </div> <!-- /container -->
+        
+        <?php echo $this->partial('layout/footer'); ?>
     </body>
 </html>
