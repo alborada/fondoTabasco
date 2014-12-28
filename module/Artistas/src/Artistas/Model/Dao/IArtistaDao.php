@@ -10,4 +10,5 @@ interface IArtistaDao {
     public function guardar(Artista $artista);
     public function eliminar(Artista $artista);
     public function obtenerArtistasSelect();
+    public function consultarArtistas($nombre);
 }

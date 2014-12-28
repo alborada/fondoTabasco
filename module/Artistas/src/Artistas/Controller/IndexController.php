@@ -26,6 +26,37 @@ class IndexController extends AbstractActionController {
        
     }
 
+    public function verAction(){
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if(!$id){
+            return $this->redirect()->toRoute('artistas');
+        }
+        return new ViewModel(array(
+           'title' => 'Datos del artista solicitado',
+            'artista' => $this->getArtistaDao()->obtenerPorId($id),
+        ));
+    }
+    
+    public function consultarAction(){
+        //No lo usamos aun
+        $titulo="";
+        if(!$this->request->isPost()){
+            return $this->redirect()->toRoute('artistas',array('controller' => 'index'));
+        }
+        $data = $this->request->getPost();
+        $nombre = $data->nombre;
+        if(!$nombre){
+            $titulo="Se debe ingresar un nombre de artista para aplicar el filtro";
+        }else{
+            $titulo="Consulta de los artistas de nombre: " . $nombre;
+        }
+        //$email = $this->params()->fromRoute('email',null);
+        return new ViewModel(array (
+            'title' => $titulo,
+            'artistas' => $this->getArtistaDao()->consultarArtistas($nombre),
+        ));
+    }
+    
     public function crearAction(){
         $form = new \Artistas\Form\Artista("artista");
         

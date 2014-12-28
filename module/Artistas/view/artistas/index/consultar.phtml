@@ -1,0 +1,61 @@
+<?php
+$this->headTitle($this->title);
+?>
+<h1><?php echo $this->escapeHtml($this->title); ?></h1>
+
+<table class="table">
+    <tr>
+        <th>Id artista</th>
+        <th>Nombre</th>
+        <th>Fecha de nacimiento</th>
+        <th>Fecha de muerte</th>
+        <th>Direccion</th>
+        <th>Lugar</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+        <th>Facebook</th>
+        <th>Twitter</th>
+        <th>Semblanza</th>
+        <th>Editar</th>
+        <th>Consultar</th>
+    </tr>
+    <?php foreach ($this->artistas as $artista):?>
+        <tr style="background-color:<?php echo $this->cycle(array("#C0F0F0",
+                                                            "#FFFFFF"))
+                                              ->next()?>">
+            <td><?php echo $artista->getIdArtista() ?></td>
+            <td><?php echo $this->escapeHtml($artista->getNombre()) ?></td>
+            <td><?php echo $artista->getFechaNacimiento() ?></td>
+            <td><?php echo $artista->getFechaMuerte() ?></td>
+            <td><?php echo $this->escapeHtml($artista->getDireccion()) ?></td>
+            <td><?php echo $this->escapeHtml($artista->getLugar()) ?></td>
+            <td><?php echo $this->escapeHtml($artista->getTelefono()) ?></td>
+            <td><?php echo $this->escapeHtml($artista->getEmail()) ?></td>
+            <td><?php echo $this->escapeHtml($artista->getFacebook()) ?></td>
+            <td><?php echo $this->escapeHtml($artista->getTwitter()) ?></td>
+            <td><?php echo $this->escapeHtml($artista->getSemblanza()) ?></td>
+            <td>
+                <a href="<?php echo $this->url('artistas',array('controller' => 'index',
+                    'action' => 'editar', 'id' => $artista->getIdArtista())) ?>">Editar</a>
+                
+            </td>
+            <td>
+                <a href="<?php echo $this->url('artistas',array('controller' =>'index',
+                    'action' => 'ver','id' => $artista->getIdArtista())) ?>">Consultar</a>
+   
+<!--                <a onclick="return confirm('¿Está seguro que desea eliminar a <?php 
+                echo $artista->getNombre() ?>? ');"
+                        href="<?php echo $this->url('artistas', array('controller' => 
+                            'index','action' => 'eliminar','id' => $artista->getIdArtista())) ?> ">Eliminar</a>
+-->
+                
+            </td>
+            
+        </tr>
+    <?php endforeach; ?>
+<?php 
+$this->cycle()->assign(array("#C0F0F0","#FFFFFF"));
+$this->cycle()->prev();
+?>
+        
+</table>

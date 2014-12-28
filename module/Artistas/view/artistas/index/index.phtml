@@ -20,7 +20,7 @@ $this->headTitle($this->title);
         <th>Twitter</th>
         <th>Semblanza</th>
         <th>Editar</th>
-        <th>Eliminar</th>
+        <th>Consultar</th>
     </tr>
     <?php foreach ($this->artistas as $artista):?>
         <tr style="background-color:<?php echo $this->cycle(array("#C0F0F0",
@@ -43,11 +43,14 @@ $this->headTitle($this->title);
                 
             </td>
             <td>
-                <a onclick="return confirm('¿Está seguro que desea eliminar a <?php 
+                <a href="<?php echo $this->url('artistas',array('controller' =>'index',
+                    'action' => 'ver','id' => $artista->getIdArtista())) ?>">Consultar</a>
+   
+<!--                <a onclick="return confirm('¿Está seguro que desea eliminar a <?php 
                 echo $artista->getNombre() ?>? ');"
                         href="<?php echo $this->url('artistas', array('controller' => 
                             'index','action' => 'eliminar','id' => $artista->getIdArtista())) ?> ">Eliminar</a>
-                
+-->
                 
             </td>
             
@@ -60,3 +63,13 @@ $this->cycle()->prev();
         
 </table>
 
+<div>
+    <br />
+    <p>Búsqueda del artista por nombre:</p>
+    <form action="<?php echo $this->url('artistas',array('controller' => 'index',
+                    'action' => 'consultar')) ?>" method="post">
+	<input type="text" name="nombre" />
+	<input type="submit" name="enviar" value="Buscar" />
+    </form>
+
+</div>

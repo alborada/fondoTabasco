@@ -4,6 +4,8 @@ namespace Artistas\Model\Dao;
 
 use Zend\Db\TableGateway\TableGateway;
 use Artistas\Model\Entity\Artista;
+use Zend\Db\Sql\Predicate\Like;
+use Zend\Db\Sql\Where;
 
 class ArtistaDao implements IArtistaDao{
 
@@ -22,7 +24,25 @@ class ArtistaDao implements IArtistaDao{
         }
         return $row;
     }
+    
+    public function consultarArtistas($nombre){
+        //No lo usamos aun
+        $select = $this->tableGateway->getSql()->select();
+        //$select->where(array('nombre' => $nombre));
 
+        $where = new Where();
+        $where->like('nombre', '%' . $nombre . '%');
+        $select->where($where);
+        
+        $rowset = $this->tableGateway->selectWith($select);
+        
+
+        if(!$rowset){
+            throw new Exception('No se pudo encontrar el artista con ese nombre');
+        }
+        return $rowset;
+    }
+    
     public function obtenerTodos() {
         $resultSet = $this->tableGateway->select();
         return $resultSet;

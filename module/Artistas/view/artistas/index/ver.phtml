@@ -1,0 +1,39 @@
+<h1><?php echo $this->escapeHtml($this->title); ?></h1>
+
+    <table style="font-size: 17px; color: #19446a;">
+        <tr>
+        <th>Nombre</th>
+        <th>Fecha de nacimiento</th>
+        <th>Fecha de muerte</th>
+        <th>Direccion</th>
+        <th>Lugar</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+        <th>Facebook</th>
+        <th>Twitter</th>
+        <th>Semblanza</th>
+     </tr>
+
+        <tr style="background-color:<?php echo $this->cycle(array("#C0F0F0",
+                                                            "#FFFFFF"))
+                                              ->next()?>">
+            <td><?php echo $this->escapeHtml($this->artista->getNombre()) ?></td>
+            <td><?php echo $this->artista->getFechaNacimiento() ?></td>
+            <td><?php echo $this->artista->getFechaMuerte() ?></td>
+            <td><?php echo $this->escapeHtml($this->artista->getDireccion()) ?></td>
+            <td><?php echo $this->escapeHtml($this->artista->getLugar()) ?></td>
+            <td><?php echo $this->escapeHtml($this->artista->getTelefono()) ?></td>
+            <td><?php echo $this->escapeHtml($this->artista->getEmail()) ?></td>
+            <td><?php echo $this->escapeHtml($this->artista->getFacebook()) ?></td>
+            <td><?php echo $this->escapeHtml($this->artista->getTwitter()) ?></td>
+            <td><?php echo $this->escapeHtml($this->artista->getSemblanza()) ?></td>
+
+        </tr>
+     
+<?php 
+$this->cycle()->assign(array("#C0F0F0","#FFFFFF"));
+$this->cycle()->prev();
+?>
+        
+
+</table>
