@@ -46,8 +46,26 @@ return array(
                     ),
                 ),
             ),
-        ),
+    'paginator' => array(
+        'type' => 'segment',
+            'options' => array(
+                'route' => '/artistas[/:controller][/:action]/page[/:page]',
+                'constraints' => array(
+                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                'page' => '[0-9]+',
+                ),
+                'defaults' => array(
+                    '__NAMESPACE__' => 'Artistas\Controller',
+                    'controller' => 'Index',
+                    'action' => 'index',
+                    'page' => 1,
+                ),
+            ),
+    ),            
     ),
+    ),
+
     'view_manager' => array(
         'template_path_stack' => array(
             'Artistas' => __DIR__ . '/../view',

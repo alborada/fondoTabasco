@@ -19,11 +19,18 @@ class IndexController extends AbstractActionController {
     }
     
     public function indexAction() {
+//        return new ViewModel(array(
+//            'title' => 'Listado de los artistas',
+//            'artistas' => $this->getArtistaDao()->obtenerTodos(),
+//        ));
+        $paginator = $this->getArtistaDao()->obtenerTodos();
+        $paginator->setCurrentPageNumber($this->params()->fromRoute('page'));
+        $paginator->setItemCountPerPage(3);
         return new ViewModel(array(
-            'title' => 'Listado de los artistas',
-            'artistas' => $this->getArtistaDao()->obtenerTodos(),
-        ));
-       
+                    'title' => 'Lista de Artistas',
+                    'artistas' => $paginator->getIterator(),
+                    'paginator' => $paginator,
+                ));
     }
 
     public function verAction(){

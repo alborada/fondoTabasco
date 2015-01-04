@@ -114,8 +114,8 @@ class Artista {
             $this->telefono=(isset($data['telefono']))? $data['telefono']:null;
             $this->semblanza=(isset($data['semblanza']))? $data['semblanza']:null;
             $this->email=(isset($data['email']))? $data['email']:null;
-            $this->fb=(isset($data['facebook']))? $data['facebook']:null;
-            $this->tw=(isset($data['twitter']))? $data['twitter']:null;
+            $this->facebook=(isset($data['facebook']))? $data['facebook']:null;
+            $this->twitter=(isset($data['twitter']))? $data['twitter']:null;
             $this->lugar=(isset($data['lugar']))? $data['lugar']:null;
     }
     

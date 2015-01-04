@@ -6,6 +6,8 @@ use Zend\Db\TableGateway\TableGateway;
 use Artistas\Model\Entity\Artista;
 use Zend\Db\Sql\Predicate\Like;
 use Zend\Db\Sql\Where;
+use Zend\Paginator\Adapter\DbSelect;
+use Zend\Paginator\Paginator;
 
 class ArtistaDao implements IArtistaDao{
 
@@ -44,8 +46,15 @@ class ArtistaDao implements IArtistaDao{
     }
     
     public function obtenerTodos() {
-        $resultSet = $this->tableGateway->select();
-        return $resultSet;
+        //$resultSet = $this->tableGateway->select();
+        //return $resultSet;
+        $select = $this->tableGateway->getSql()->select();
+        $dbAdapter = $this->tableGateway->getAdapter();
+        $resultSetPrototype = $this->tableGateway->getResultSetPrototype();
+
+        $adapter = new DbSelect($select, $dbAdapter, $resultSetPrototype);
+        $paginator = new Paginator($adapter);
+        return $paginator;
     }
 
     public function obtenerArtistasSelect(){

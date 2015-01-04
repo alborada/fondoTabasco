@@ -4,9 +4,12 @@
     <head>
         <?php echo $this->headMeta()->setCharset('UTF-8')?>
         <?php echo $this->headTitle('') ?>
-        <?php echo $this->headLink()->prependStylesheet($this->basePath().'/css/style.css')?>
+        <?php echo $this->headLink()->prependStylesheet($this->basePath().'/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')?>
         <?php echo $this->headStyle()?>
         <?php echo $this->headScript()->prependFile($this->basePath().'/js/jquery.min.js')?>
+        <?php echo $this->headScript()->prependFile($this->basePath().'/js/scripts.js')?>
     </head>
     <body>
 <!--                <img src="<?php echo $this->basePath().'/img/pages/home.png' ?>" border="0"> -->
